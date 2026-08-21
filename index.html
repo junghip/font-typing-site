@@ -270,26 +270,23 @@
     width: 44px;
     height: 44px;
     border: none;
-    background: var(--ink);
-    color: var(--specimen-bg);
-    border-radius: 8px;
+    background: none;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     padding: 0;
     flex-shrink: 0;
-    transition: background 0.15s ease;
-  }
-
-  .reset-btn:hover {
-    background: var(--accent);
   }
 
   .reset-btn svg {
-    width: 22px;
-    height: 22px;
+    width: 44px;
+    height: 44px;
     display: block;
+  }
+
+  .reset-btn:hover svg rect {
+    fill: var(--accent);
   }
 
   .text-viewport {
@@ -604,9 +601,9 @@
           <span class="size-value" id="sizeValue">48</span>
           <input type="range" id="sizeSlider" min="14" max="160" step="1" value="48" aria-label="글자 크기 조절" />
           <button class="reset-btn" id="resetBtn" title="기본 사이즈와 텍스트로 초기화" aria-label="기본 사이즈와 텍스트로 초기화">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M20 11A8 8 0 1 0 19 15" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M20 5V11H14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="44" height="44" fill="black"/>
+              <path d="M11.1938 15.3885C10.8561 15.9906 11.0704 16.7525 11.6725 17.0902C12.2746 17.4279 13.0365 17.2136 13.3742 16.6115L12.284 16L11.1938 15.3885ZM10 17.5H8.75L10 18.75V17.5ZM22.3636 10V11.25C28.0639 11.25 32.75 16.0264 32.75 22H34H35.25C35.25 14.7188 29.5166 8.75 22.3636 8.75V10ZM34 22H32.75C32.75 27.9736 28.0639 32.75 22.3636 32.75V34V35.25C29.5166 35.25 35.25 29.2812 35.25 22H34ZM22.3636 34V32.75C17.7878 32.75 13.8709 29.6787 12.4977 25.3704L11.3067 25.75L10.1158 26.1296C11.7965 31.4031 16.6261 35.25 22.3636 35.25V34ZM12.284 16L13.3742 16.6115C15.1807 13.391 18.5399 11.25 22.3636 11.25V10V8.75C17.5732 8.75 13.4113 11.4353 11.1938 15.3885L12.284 16ZM15.8182 17.5V16.25H10V17.5V18.75H15.8182V17.5ZM10 17.5H11.25V11.5H10H8.75V17.5H10Z" fill="white"/>
             </svg>
           </button>
         </div>
