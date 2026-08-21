@@ -3,12 +3,21 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Pretendard Type Tester</title>
+<title>Play-Rulez Type Tester</title>
 <link rel="stylesheet" as="style" crossorigin
   href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Quicksand:wght@500;600&display=swap" rel="stylesheet">
 <style>
+  @font-face {
+    font-family: 'Penelope';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('assets/fonts/Penelope-Regular.woff') format('woff'),
+         url('assets/fonts/Penelope-Regular.otf') format('opentype');
+  }
+
   :root {
     --bg: #f6f4ef;
     --surface: #ded9cf;
@@ -17,6 +26,7 @@
     --muted: #726c5e;
     --accent: #a83a28;
     --focus: #a83a28;
+    --header-height: 96px;
   }
 
   * { box-sizing: border-box; }
@@ -35,7 +45,98 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 64px 20px 40px;
+  }
+
+  /* ---- fixed top bar ---- */
+
+  .site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--header-height);
+    background: var(--bg);
+    z-index: 60;
+    display: flex;
+    align-items: center;
+  }
+
+  .site-header-inner {
+    width: 100%;
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .site-title {
+    font-family: 'Penelope', 'Pretendard', sans-serif;
+    font-size: 32px;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    color: var(--ink);
+  }
+
+  .site-nav {
+    display: flex;
+    align-items: center;
+    gap: 44px;
+  }
+
+  .site-nav span {
+    font-family: 'Quicksand', 'Pretendard', sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .corner-mark {
+    position: fixed;
+    top: 20px;
+    width: 10px;
+    height: 10px;
+    background: var(--ink);
+    z-index: 61;
+  }
+
+  .corner-mark.left { left: 20px; }
+  .corner-mark.right { right: 20px; }
+
+  .spine-mark {
+    position: fixed;
+    top: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 10px;
+    height: 10px;
+    background: var(--ink);
+    z-index: 61;
+  }
+
+  .spine-line {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 1px;
+    background: var(--ink);
+    opacity: 0.15;
+    z-index: 1;
+  }
+
+  /* ---- shared page container ---- */
+
+  main {
+    width: 100%;
+    padding-top: var(--header-height);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .page {
@@ -44,6 +145,36 @@
     display: flex;
     flex-direction: column;
     gap: 18px;
+    padding: 0 20px;
+  }
+
+  /* ---- hero ---- */
+
+  .hero {
+    padding: 56px 20px 72px;
+  }
+
+  .hero-graphic {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .hero-description {
+    margin-top: 36px;
+    max-width: 900px;
+    text-align: left;
+    font-family: 'Apple SD Gothic Neo', 'Pretendard', sans-serif;
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 1.55;
+    color: var(--ink);
+  }
+
+  /* ---- specimen tool ---- */
+
+  .specimen-section {
+    padding: 40px 20px 60px;
   }
 
   .eyebrow {
@@ -196,6 +327,11 @@
   }
 
   @media (max-width: 640px) {
+    .site-header-inner { padding: 0 20px; }
+    .site-title { font-size: 24px; }
+    .site-nav { gap: 20px; }
+    .site-nav span { font-size: 14px; }
+    .hero-description { font-size: 22px; }
     .text-viewport { padding: 22px; height: 50vh; }
     .specimen-header, .specimen-footer { padding: 14px 16px; }
   }
@@ -203,47 +339,70 @@
 </head>
 <body>
 
-<div class="page">
-  <div class="eyebrow">Type specimen &mdash; 대한민국헌법</div>
-  <h1>글자 크기를 바꾸면 보이는 문장의 양이 달라집니다.</h1>
+<div class="corner-mark left"></div>
+<div class="corner-mark right"></div>
+<div class="spine-mark"></div>
+<div class="spine-line"></div>
 
-  <div class="specimen">
-    <div class="specimen-header">
-      <div class="specimen-label">Pretendard Regular</div>
-      <div class="size-control">
-        <span class="size-control-label">Size / Layout</span>
-        <span class="size-value" id="sizeValue">48</span>
-        <input type="range" id="sizeSlider" min="14" max="160" step="1" value="48" aria-label="글자 크기 조절" />
-        <button class="reset-btn" id="resetBtn" title="기본 사이즈와 텍스트로 초기화" aria-label="기본 사이즈와 텍스트로 초기화">
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M20 11A8 8 0 1 0 19 15" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M20 5V11H14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </button>
+<header class="site-header">
+  <div class="site-header-inner">
+    <div class="site-title">PLAY-RULEZ</div>
+    <nav class="site-nav">
+      <span>Chess</span>
+      <span>Omok</span>
+      <span>Board Game</span>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero page">
+    <img class="hero-graphic" src="assets/images/상단이미지.png" alt="Play-Rulez 그래픽 오브젝트" />
+    <p class="hero-description">Play-Rulez는 놀이 데이터를 활용한 그래픽 실험 프로젝트이다. Play-Rulez는 놀이의 규칙을 실행하겠다는 의미이기도 하며 동시에 모든 것을 놀이로 접근하겠다는 선언이기도 하다. 놀이의 움직임과 규칙을 데이터로 기록하고 이를 시각화하는 과정에서 만들어진 그래픽을 활용해 상상력을 자극하는 시각적 경험을 제시한다.</p>
+  </section>
+
+  <section class="specimen-section page">
+    <div class="eyebrow">Type specimen &mdash; 대한민국헌법</div>
+    <h1>글자 크기를 바꾸면 보이는 문장의 양이 달라집니다.</h1>
+
+    <div class="specimen">
+      <div class="specimen-header">
+        <div class="specimen-label">Pretendard Regular</div>
+        <div class="size-control">
+          <span class="size-control-label">Size / Layout</span>
+          <span class="size-value" id="sizeValue">48</span>
+          <input type="range" id="sizeSlider" min="14" max="160" step="1" value="48" aria-label="글자 크기 조절" />
+          <button class="reset-btn" id="resetBtn" title="기본 사이즈와 텍스트로 초기화" aria-label="기본 사이즈와 텍스트로 초기화">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M20 11A8 8 0 1 0 19 15" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M20 5V11H14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="text-viewport">
+        <div
+          class="editable-text"
+          id="editableText"
+          contenteditable="true"
+          spellcheck="false"
+          data-placeholder="문구를 입력해주세요"
+          style="font-size: 48px;"
+        >모든 국민은 법률이 정하는 바에 의하여 공무담임권을 가진다. 이 헌법시행 당시의 대법원장과 대법원판사가 아닌 법관은 제1항 단서의 규정에 불구하고 이 헌법에 의하여 임명된 것으로 본다. 누구든지 체포 또는 구속을 당한 때에는 즉시 변호인의 조력을 받을 권리를 가진다. 다만, 형사피고인이 스스로 변호인을 구할 수 없을 때에는 법률이 정하는 바에 의하여 국가가 변호인을 붙인다. 군인·군무원·경찰공무원 기타 법률이 정하는 자가 전투·훈련등 직무집행과 관련하여 받은 손해에 대하여는 법률이 정하는 보상외에 국가 또는 공공단체에 공무원의 직무상 불법행위로 인한 배상은 청구할 수 없다.
+
+대한민국의 영토는 한반도와 그 부속도서로 한다. 제1항의 지시를 받은 당해 행정기관은 이에 응하여야 한다. 국가는 대외무역을 육성하며, 이를 규제·조정할 수 있다. 국가는 전통문화의 계승·발전과 민족문화의 창달에 노력하여야 한다. 예비비는 총액으로 국회의 의결을 얻어야 한다. 예비비의 지출은 차기국회의 승인을 얻어야 한다. 국회는 국민의 보통·평등·직접·비밀선거에 의하여 선출된 국회의원으로 구성한다. 통신·방송의 시설기준과 신문의 기능을 보장하기 위하여 필요한 사항은 법률로 정한다. 대통령은 국무회의의 의장이 되고, 국무총리는 부의장이 된다. 계엄을 선포한 때에는 대통령은 지체없이 국회에 통고하여야 한다.</div>
+      </div>
+
+      <div class="specimen-footer">
+        <span>보이는 글자 <strong id="visibleCount">0</strong>자 / 전체 <strong id="totalCount">0</strong>자</span>
+        <span>클리핑된 글자 <strong id="clippedCount">0</strong>자</span>
       </div>
     </div>
 
-    <div class="text-viewport">
-      <div
-        class="editable-text"
-        id="editableText"
-        contenteditable="true"
-        spellcheck="false"
-        data-placeholder="문구를 입력해주세요"
-        style="font-size: 48px;"
-      >모든 국민은 법률이 정하는 바에 의하여 공무담임권을 가진다. 이 헌법시행 당시의 대법원장과 대법원판사가 아닌 법관은 제1항 단서의 규정에 불구하고 이 헌법에 의하여 임명된 것으로 본다. 누구든지 체포 또는 구속을 당한 때에는 즉시 변호인의 조력을 받을 권리를 가진다. 다만, 형사피고인이 스스로 변호인을 구할 수 없을 때에는 법률이 정하는 바에 의하여 국가가 변호인을 붙인다. 군인·군무원·경찰공무원 기타 법률이 정하는 자가 전투·훈련등 직무집행과 관련하여 받은 손해에 대하여는 법률이 정하는 보상외에 국가 또는 공공단체에 공무원의 직무상 불법행위로 인한 배상은 청구할 수 없다.
-
-대한민국의 영토는 한반도와 그 부속도서로 한다. 제1항의 지시를 받은 당해 행정기관은 이에 응하여야 한다. 국가는 대외무역을 육성하며, 이를 규제·조정할 수 있다. 국가는 전통문화의 계승·발전과 민족문화의 창달에 노력하여야 한다. 예비비는 총액으로 국회의 의결을 얻어야 한다. 예비비의 지출은 차기국회의 승인을 얻어야 한다. 국회는 국민의 보통·평등·직접·비밀선거에 의하여 선출된 국회의원으로 구성한다. 통신·방송의 시설기준과 신문의 기능을 보장하기 위하여 필요한 사항은 법률로 정한다. 대통령은 국무회의의 의장이 되고, 국무총리는 부의장이 된다. 계엄을 선포한 때에는 대통령은 지체없이 국회에 통고하여야 한다.</div>
-    </div>
-
-    <div class="specimen-footer">
-      <span>보이는 글자 <strong id="visibleCount">0</strong>자 / 전체 <strong id="totalCount">0</strong>자</span>
-      <span>클리핑된 글자 <strong id="clippedCount">0</strong>자</span>
-    </div>
-  </div>
-
-  <div class="hint">텍스트를 클릭해 직접 수정할 수 있습니다. 슬라이더로 크기를 조절하면 글자가 커질수록 일부만, 작아질수록 더 많은 문장이 보입니다. 초기화 버튼을 누르면 크기와 문구가 모두 기본값으로 돌아갑니다.</div>
-</div>
+    <div class="hint">텍스트를 클릭해 직접 수정할 수 있습니다. 슬라이더로 크기를 조절하면 글자가 커질수록 일부만, 작아질수록 더 많은 문장이 보입니다. 초기화 버튼을 누르면 크기와 문구가 모두 기본값으로 돌아갑니다.</div>
+  </section>
+</main>
 
 <script>
   const DEFAULT_SIZE = 48;
