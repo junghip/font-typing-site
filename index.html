@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pretendard Type Tester</title>
+<link rel="stylesheet" as="style" crossorigin
+  href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f6f4ef;
+    --surface: #ded9cf;
+    --surface-strong: #cdc6b8;
+    --ink: #1c1a15;
+    --muted: #726c5e;
+    --accent: #a83a28;
+    --focus: #a83a28;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Malgun Gothic', sans-serif;
+    font-weight: 400;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 64px 20px 40px;
+  }
+
+  .page {
+    width: 100%;
+    max-width: 1160px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .eyebrow {
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  h1 {
+    margin: 0;
+    font-size: clamp(22px, 3vw, 30px);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+
+  .specimen {
+    background: var(--surface);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .specimen-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+    padding: 16px 22px;
+    background: var(--surface-strong);
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  }
+
+  .specimen-label {
+    font-size: 13px;
+    color: var(--ink);
+  }
+
+  .size-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .size-control-label {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  .size-value {
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+    min-width: 30px;
+    text-align: right;
+    color: var(--ink);
+  }
+
+  input[type="range"] {
+    width: 200px;
+    accent-color: var(--accent);
+    cursor: pointer;
+  }
+
+  input[type="range"]:focus-visible,
+  .reset-btn:focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+  }
+
+  .reset-btn {
+    width: 26px;
+    height: 26px;
+    border: none;
+    background: var(--bg);
+    color: var(--ink);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 0;
+    flex-shrink: 0;
+    transition: background 0.15s ease;
+  }
+
+  .reset-btn:hover {
+    background: var(--accent);
+    color: var(--bg);
+  }
+
+  .reset-btn svg {
+    width: 14px;
+    height: 14px;
+    display: block;
+  }
+
+  .text-viewport {
+    height: 58vh;
+    min-height: 300px;
+    max-height: 680px;
+    overflow: hidden;
+    padding: 36px;
+  }
+
+  .editable-text {
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Malgun Gothic', sans-serif;
+    font-weight: 400;
+    line-height: 1.32;
+    letter-spacing: -0.01em;
+    outline: none;
+    white-space: pre-wrap;
+    word-break: keep-all;
+    color: var(--ink);
+  }
+
+  .editable-text:empty::before {
+    content: attr(data-placeholder);
+    color: var(--muted);
+  }
+
+  .specimen-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+    padding: 12px 22px;
+    background: var(--surface-strong);
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+  }
+
+  .specimen-footer strong {
+    color: var(--ink);
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .hint {
+    font-size: 13px;
+    color: var(--muted);
+    padding: 0 2px;
+  }
+
+  @media (max-width: 640px) {
+    .text-viewport { padding: 22px; height: 50vh; }
+    .specimen-header, .specimen-footer { padding: 14px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+  <div class="eyebrow">Type specimen &mdash; 대한민국헌법</div>
+  <h1>글자 크기를 바꾸면 보이는 문장의 양이 달라집니다.</h1>
+
+  <div class="specimen">
+    <div class="specimen-header">
+      <div class="specimen-label">Pretendard Regular</div>
+      <div class="size-control">
+        <span class="size-control-label">Size / Layout</span>
+        <span class="size-value" id="sizeValue">48</span>
+        <input type="range" id="sizeSlider" min="14" max="160" step="1" value="48" aria-label="글자 크기 조절" />
+        <button class="reset-btn" id="resetBtn" title="기본 사이즈와 텍스트로 초기화" aria-label="기본 사이즈와 텍스트로 초기화">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 11A8 8 0 1 0 19 15" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M20 5V11H14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="text-viewport">
+      <div
+        class="editable-text"
+        id="editableText"
+        contenteditable="true"
+        spellcheck="false"
+        data-placeholder="문구를 입력해주세요"
+        style="font-size: 48px;"
+      >모든 국민은 법률이 정하는 바에 의하여 공무담임권을 가진다. 이 헌법시행 당시의 대법원장과 대법원판사가 아닌 법관은 제1항 단서의 규정에 불구하고 이 헌법에 의하여 임명된 것으로 본다. 누구든지 체포 또는 구속을 당한 때에는 즉시 변호인의 조력을 받을 권리를 가진다. 다만, 형사피고인이 스스로 변호인을 구할 수 없을 때에는 법률이 정하는 바에 의하여 국가가 변호인을 붙인다. 군인·군무원·경찰공무원 기타 법률이 정하는 자가 전투·훈련등 직무집행과 관련하여 받은 손해에 대하여는 법률이 정하는 보상외에 국가 또는 공공단체에 공무원의 직무상 불법행위로 인한 배상은 청구할 수 없다.
+
+대한민국의 영토는 한반도와 그 부속도서로 한다. 제1항의 지시를 받은 당해 행정기관은 이에 응하여야 한다. 국가는 대외무역을 육성하며, 이를 규제·조정할 수 있다. 국가는 전통문화의 계승·발전과 민족문화의 창달에 노력하여야 한다. 예비비는 총액으로 국회의 의결을 얻어야 한다. 예비비의 지출은 차기국회의 승인을 얻어야 한다. 국회는 국민의 보통·평등·직접·비밀선거에 의하여 선출된 국회의원으로 구성한다. 통신·방송의 시설기준과 신문의 기능을 보장하기 위하여 필요한 사항은 법률로 정한다. 대통령은 국무회의의 의장이 되고, 국무총리는 부의장이 된다. 계엄을 선포한 때에는 대통령은 지체없이 국회에 통고하여야 한다.</div>
+    </div>
+
+    <div class="specimen-footer">
+      <span>보이는 글자 <strong id="visibleCount">0</strong>자 / 전체 <strong id="totalCount">0</strong>자</span>
+      <span>클리핑된 글자 <strong id="clippedCount">0</strong>자</span>
+    </div>
+  </div>
+
+  <div class="hint">텍스트를 클릭해 직접 수정할 수 있습니다. 슬라이더로 크기를 조절하면 글자가 커질수록 일부만, 작아질수록 더 많은 문장이 보입니다. 초기화 버튼을 누르면 크기와 문구가 모두 기본값으로 돌아갑니다.</div>
+</div>
+
+<script>
+  const DEFAULT_SIZE = 48;
+  const DEFAULT_TEXT = `모든 국민은 법률이 정하는 바에 의하여 공무담임권을 가진다. 이 헌법시행 당시의 대법원장과 대법원판사가 아닌 법관은 제1항 단서의 규정에 불구하고 이 헌법에 의하여 임명된 것으로 본다. 누구든지 체포 또는 구속을 당한 때에는 즉시 변호인의 조력을 받을 권리를 가진다. 다만, 형사피고인이 스스로 변호인을 구할 수 없을 때에는 법률이 정하는 바에 의하여 국가가 변호인을 붙인다. 군인·군무원·경찰공무원 기타 법률이 정하는 자가 전투·훈련등 직무집행과 관련하여 받은 손해에 대하여는 법률이 정하는 보상외에 국가 또는 공공단체에 공무원의 직무상 불법행위로 인한 배상은 청구할 수 없다.
+
+대한민국의 영토는 한반도와 그 부속도서로 한다. 제1항의 지시를 받은 당해 행정기관은 이에 응하여야 한다. 국가는 대외무역을 육성하며, 이를 규제·조정할 수 있다. 국가는 전통문화의 계승·발전과 민족문화의 창달에 노력하여야 한다. 예비비는 총액으로 국회의 의결을 얻어야 한다. 예비비의 지출은 차기국회의 승인을 얻어야 한다. 국회는 국민의 보통·평등·직접·비밀선거에 의하여 선출된 국회의원으로 구성한다. 통신·방송의 시설기준과 신문의 기능을 보장하기 위하여 필요한 사항은 법률로 정한다. 대통령은 국무회의의 의장이 되고, 국무총리는 부의장이 된다. 계엄을 선포한 때에는 대통령은 지체없이 국회에 통고하여야 한다.`;
+
+  const slider = document.getElementById('sizeSlider');
+  const sizeValue = document.getElementById('sizeValue');
+  const editable = document.getElementById('editableText');
+  const resetBtn = document.getElementById('resetBtn');
+  const visibleCountEl = document.getElementById('visibleCount');
+  const totalCountEl = document.getElementById('totalCount');
+  const clippedCountEl = document.getElementById('clippedCount');
+  const viewport = document.querySelector('.text-viewport');
+
+  function countVisibleChars() {
+    const total = editable.textContent.length;
+    const viewportRect = viewport.getBoundingClientRect();
+    const range = document.createRange();
+    let visible = total;
+
+    const walker = document.createTreeWalker(editable, NodeFilter.SHOW_TEXT);
+    let node;
+    let charsCounted = 0;
+    let cutoffFound = false;
+
+    while ((node = walker.nextNode())) {
+      const text = node.textContent;
+      for (let i = 0; i < text.length; i++) {
+        range.setStart(node, i);
+        range.setEnd(node, i + 1);
+        const rect = range.getBoundingClientRect();
+        if (rect.bottom > viewportRect.bottom || rect.top < viewportRect.top) {
+          visible = charsCounted;
+          cutoffFound = true;
+          break;
+        }
+        charsCounted++;
+      }
+      if (cutoffFound) break;
+    }
+
+    totalCountEl.textContent = total;
+    visibleCountEl.textContent = visible;
+    clippedCountEl.textContent = Math.max(total - visible, 0);
+  }
+
+  function applySize(size) {
+    editable.style.fontSize = size + 'px';
+    sizeValue.textContent = size;
+    slider.value = size;
+    requestAnimationFrame(countVisibleChars);
+  }
+
+  slider.addEventListener('input', () => applySize(slider.value));
+
+  resetBtn.addEventListener('click', () => {
+    editable.textContent = DEFAULT_TEXT;
+    applySize(DEFAULT_SIZE);
+  });
+
+  editable.addEventListener('input', () => requestAnimationFrame(countVisibleChars));
+  window.addEventListener('resize', () => requestAnimationFrame(countVisibleChars));
+
+  applySize(DEFAULT_SIZE);
+</script>
+
+</body>
+</html>
