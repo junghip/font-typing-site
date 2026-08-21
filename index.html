@@ -19,15 +19,15 @@
   }
 
   :root {
-    --bg: #f6f4ef;
-    --surface: #ded9cf;
-    --surface-strong: #cdc6b8;
+    --bg: #ffffff;
+    --specimen-bg: #f2f2f2;
     --ink: #1c1a15;
     --muted: #726c5e;
     --accent: #a83a28;
     --focus: #a83a28;
     --header-height: 96px;
-    --content-max: 1520px;
+    --content-max: 1920px;
+    --side-margin: 80px;
     --placeholder: #bebdbd;
   }
 
@@ -36,6 +36,7 @@
   html, body {
     margin: 0;
     padding: 0;
+    overflow-x: hidden;
   }
 
   body {
@@ -67,7 +68,7 @@
     width: 100%;
     max-width: var(--content-max);
     margin: 0 auto;
-    padding: 0 40px;
+    padding: 0 var(--side-margin);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -147,13 +148,13 @@
     display: flex;
     flex-direction: column;
     gap: 18px;
-    padding: 0 20px;
+    padding: 0 var(--side-margin);
   }
 
   /* ---- hero ---- */
 
   .hero {
-    padding: 56px 20px 72px;
+    padding: 56px 0 72px;
   }
 
   .hero-graphic {
@@ -173,75 +174,89 @@
     color: var(--ink);
   }
 
-  /* ---- specimen tool ---- */
+  /* ---- specimen tool (matches Figma Frame 5) ---- */
 
   .specimen-section {
-    padding: 40px 20px 60px;
-  }
-
-  .eyebrow {
-    font-family: 'IBM Plex Mono', ui-monospace, monospace;
-    font-size: 11px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-
-  h1 {
-    margin: 0;
-    font-size: clamp(22px, 3vw, 30px);
-    font-weight: 400;
-    letter-spacing: -0.01em;
-    text-wrap: balance;
+    padding: 40px 0 60px;
   }
 
   .specimen {
-    background: var(--surface);
-    border-radius: 4px;
-    overflow: hidden;
+    background: var(--specimen-bg);
+    padding: 60px var(--side-margin);
   }
 
   .specimen-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 20px;
+    gap: 24px;
     flex-wrap: wrap;
-    padding: 16px 22px;
-    background: var(--surface-strong);
-    font-family: 'IBM Plex Mono', ui-monospace, monospace;
   }
 
   .specimen-label {
-    font-size: 13px;
+    font-family: 'Apple SD Gothic Neo', 'Pretendard', sans-serif;
+    font-weight: 500;
+    font-size: 30px;
     color: var(--ink);
   }
 
   .size-control {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 16px;
   }
 
   .size-control-label {
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--muted);
+    font-family: 'Apple SD Gothic Neo', 'Pretendard', sans-serif;
+    font-weight: 500;
+    font-size: 30px;
+    color: var(--ink);
     white-space: nowrap;
   }
 
   .size-value {
-    font-size: 13px;
+    font-family: 'Apple SD Gothic Neo', 'Pretendard', sans-serif;
+    font-weight: 500;
+    font-size: 30px;
     font-variant-numeric: tabular-nums;
-    min-width: 30px;
-    text-align: right;
+    min-width: 52px;
     color: var(--ink);
   }
 
   input[type="range"] {
-    width: 200px;
-    accent-color: var(--accent);
+    width: 240px;
+    height: 24px;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    background: transparent;
+  }
+
+  input[type="range"]::-webkit-slider-runnable-track {
+    height: 2px;
+    background: var(--ink);
+  }
+
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 24px;
+    height: 24px;
+    background: var(--ink);
+    margin-top: -11px;
+    cursor: pointer;
+  }
+
+  input[type="range"]::-moz-range-track {
+    height: 2px;
+    background: var(--ink);
+  }
+
+  input[type="range"]::-moz-range-thumb {
+    width: 24px;
+    height: 24px;
+    border: none;
+    border-radius: 0;
+    background: var(--ink);
     cursor: pointer;
   }
 
@@ -252,12 +267,12 @@
   }
 
   .reset-btn {
-    width: 26px;
-    height: 26px;
+    width: 44px;
+    height: 44px;
     border: none;
-    background: var(--bg);
-    color: var(--ink);
-    border-radius: 4px;
+    background: var(--ink);
+    color: var(--specimen-bg);
+    border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -269,12 +284,11 @@
 
   .reset-btn:hover {
     background: var(--accent);
-    color: var(--bg);
   }
 
   .reset-btn svg {
-    width: 14px;
-    height: 14px;
+    width: 22px;
+    height: 22px;
     display: block;
   }
 
@@ -283,7 +297,7 @@
     min-height: 300px;
     max-height: 680px;
     overflow: hidden;
-    padding: 36px;
+    margin-top: 60px;
   }
 
   .editable-text {
@@ -302,30 +316,11 @@
     color: var(--muted);
   }
 
-  .specimen-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-    flex-wrap: wrap;
-    padding: 12px 22px;
-    background: var(--surface-strong);
-    font-family: 'IBM Plex Mono', ui-monospace, monospace;
-    font-size: 11px;
-    letter-spacing: 0.04em;
-    color: var(--muted);
-  }
-
-  .specimen-footer strong {
-    color: var(--ink);
-    font-weight: 500;
-    font-variant-numeric: tabular-nums;
-  }
-
   .hint {
-    font-size: 13px;
+    margin-top: 16px;
+    font-family: 'Apple SD Gothic Neo', 'Pretendard', sans-serif;
+    font-size: 14px;
     color: var(--muted);
-    padding: 0 2px;
   }
 
   /* ---- placeholder gray blocks ---- */
@@ -333,6 +328,7 @@
   .gray-block {
     background: var(--placeholder);
     width: 100%;
+    min-width: 0;
     display: block;
     border-radius: 2px;
   }
@@ -350,7 +346,7 @@
   .section-divider {
     width: 100%;
     max-width: var(--content-max);
-    padding: 0 20px;
+    padding: 0 var(--side-margin);
     display: flex;
     align-items: center;
     gap: 12px;
@@ -377,7 +373,7 @@
   /* ---- research section ---- */
 
   .research-section {
-    padding: 24px 20px 64px;
+    padding: 24px 0 64px;
   }
 
   .research-citation {
@@ -432,7 +428,7 @@
   /* ---- section copy blocks (font / sound) ---- */
 
   .copy-section {
-    padding: 40px 20px;
+    padding: 40px 0;
   }
 
   .section-body {
@@ -483,7 +479,7 @@
   .site-footer {
     width: 100%;
     max-width: var(--content-max);
-    padding: 36px 20px 64px;
+    padding: 36px var(--side-margin) 64px;
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
@@ -526,14 +522,18 @@
     background: var(--accent);
   }
 
+  @media (max-width: 900px) {
+    :root { --side-margin: 24px; }
+  }
+
   @media (max-width: 640px) {
-    .site-header-inner { padding: 0 20px; }
     .site-title { font-size: 24px; }
     .site-nav { gap: 20px; }
     .site-nav span { font-size: 14px; }
     .hero-description { font-size: 22px; }
-    .text-viewport { padding: 22px; height: 50vh; }
-    .specimen-header, .specimen-footer { padding: 14px 16px; }
+    .specimen { padding: 32px var(--side-margin); }
+    .specimen-label, .size-control-label, .size-value { font-size: 18px; }
+    .text-viewport { height: 50vh; margin-top: 32px; }
     .research-copy, .section-body { font-size: 16px; }
     .gallery-grid { grid-template-columns: repeat(2, 1fr); }
     .gallery-grid.two-col { grid-template-columns: 1fr; }
@@ -596,9 +596,6 @@
   <div class="section-divider"><span class="section-divider-dot"></span></div>
 
   <section class="specimen-section page">
-    <div class="eyebrow">Type specimen &mdash; 대한민국헌법</div>
-    <h1>글자 크기를 바꾸면 보이는 문장의 양이 달라집니다.</h1>
-
     <div class="specimen">
       <div class="specimen-header">
         <div class="specimen-label">Pretendard Regular</div>
@@ -626,11 +623,6 @@
         >모든 국민은 법률이 정하는 바에 의하여 공무담임권을 가진다. 이 헌법시행 당시의 대법원장과 대법원판사가 아닌 법관은 제1항 단서의 규정에 불구하고 이 헌법에 의하여 임명된 것으로 본다. 누구든지 체포 또는 구속을 당한 때에는 즉시 변호인의 조력을 받을 권리를 가진다. 다만, 형사피고인이 스스로 변호인을 구할 수 없을 때에는 법률이 정하는 바에 의하여 국가가 변호인을 붙인다. 군인·군무원·경찰공무원 기타 법률이 정하는 자가 전투·훈련등 직무집행과 관련하여 받은 손해에 대하여는 법률이 정하는 보상외에 국가 또는 공공단체에 공무원의 직무상 불법행위로 인한 배상은 청구할 수 없다.
 
 대한민국의 영토는 한반도와 그 부속도서로 한다. 제1항의 지시를 받은 당해 행정기관은 이에 응하여야 한다. 국가는 대외무역을 육성하며, 이를 규제·조정할 수 있다. 국가는 전통문화의 계승·발전과 민족문화의 창달에 노력하여야 한다. 예비비는 총액으로 국회의 의결을 얻어야 한다. 예비비의 지출은 차기국회의 승인을 얻어야 한다. 국회는 국민의 보통·평등·직접·비밀선거에 의하여 선출된 국회의원으로 구성한다. 통신·방송의 시설기준과 신문의 기능을 보장하기 위하여 필요한 사항은 법률로 정한다. 대통령은 국무회의의 의장이 되고, 국무총리는 부의장이 된다. 계엄을 선포한 때에는 대통령은 지체없이 국회에 통고하여야 한다.</div>
-      </div>
-
-      <div class="specimen-footer">
-        <span>보이는 글자 <strong id="visibleCount">0</strong>자 / 전체 <strong id="totalCount">0</strong>자</span>
-        <span>클리핑된 글자 <strong id="clippedCount">0</strong>자</span>
       </div>
     </div>
 
@@ -689,48 +681,11 @@
   const sizeValue = document.getElementById('sizeValue');
   const editable = document.getElementById('editableText');
   const resetBtn = document.getElementById('resetBtn');
-  const visibleCountEl = document.getElementById('visibleCount');
-  const totalCountEl = document.getElementById('totalCount');
-  const clippedCountEl = document.getElementById('clippedCount');
-  const viewport = document.querySelector('.text-viewport');
-
-  function countVisibleChars() {
-    const total = editable.textContent.length;
-    const viewportRect = viewport.getBoundingClientRect();
-    const range = document.createRange();
-    let visible = total;
-
-    const walker = document.createTreeWalker(editable, NodeFilter.SHOW_TEXT);
-    let node;
-    let charsCounted = 0;
-    let cutoffFound = false;
-
-    while ((node = walker.nextNode())) {
-      const text = node.textContent;
-      for (let i = 0; i < text.length; i++) {
-        range.setStart(node, i);
-        range.setEnd(node, i + 1);
-        const rect = range.getBoundingClientRect();
-        if (rect.bottom > viewportRect.bottom || rect.top < viewportRect.top) {
-          visible = charsCounted;
-          cutoffFound = true;
-          break;
-        }
-        charsCounted++;
-      }
-      if (cutoffFound) break;
-    }
-
-    totalCountEl.textContent = total;
-    visibleCountEl.textContent = visible;
-    clippedCountEl.textContent = Math.max(total - visible, 0);
-  }
 
   function applySize(size) {
     editable.style.fontSize = size + 'px';
     sizeValue.textContent = size;
     slider.value = size;
-    requestAnimationFrame(countVisibleChars);
   }
 
   slider.addEventListener('input', () => applySize(slider.value));
@@ -739,9 +694,6 @@
     editable.textContent = DEFAULT_TEXT;
     applySize(DEFAULT_SIZE);
   });
-
-  editable.addEventListener('input', () => requestAnimationFrame(countVisibleChars));
-  window.addEventListener('resize', () => requestAnimationFrame(countVisibleChars));
 
   applySize(DEFAULT_SIZE);
 
