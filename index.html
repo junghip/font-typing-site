@@ -169,7 +169,7 @@
     text-align: left;
     font-family: 'Apple SD Gothic Neo', 'Pretendard', sans-serif;
     font-weight: 500;
-    font-size: 30px;
+    font-size: 26px;
     line-height: 1.55;
     color: var(--ink);
   }
@@ -183,6 +183,7 @@
   .specimen {
     background: var(--specimen-bg);
     padding: 60px var(--side-margin);
+    border-radius: 20px;
   }
 
   .specimen-header {
@@ -196,7 +197,7 @@
   .specimen-label {
     font-family: 'Apple SD Gothic Neo', 'Pretendard', sans-serif;
     font-weight: 500;
-    font-size: 30px;
+    font-size: 20px;
     color: var(--ink);
   }
 
@@ -209,7 +210,7 @@
   .size-control-label {
     font-family: 'Apple SD Gothic Neo', 'Pretendard', sans-serif;
     font-weight: 500;
-    font-size: 30px;
+    font-size: 20px;
     color: var(--ink);
     white-space: nowrap;
   }
@@ -217,9 +218,9 @@
   .size-value {
     font-family: 'Apple SD Gothic Neo', 'Pretendard', sans-serif;
     font-weight: 500;
-    font-size: 30px;
+    font-size: 20px;
     font-variant-numeric: tabular-nums;
-    min-width: 52px;
+    min-width: 36px;
     color: var(--ink);
   }
 
@@ -239,10 +240,10 @@
 
   input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
     background: var(--ink);
-    margin-top: -11px;
+    margin-top: -9px;
     cursor: pointer;
   }
 
@@ -252,8 +253,8 @@
   }
 
   input[type="range"]::-moz-range-thumb {
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
     border: none;
     border-radius: 0;
     background: var(--ink);
@@ -267,8 +268,8 @@
   }
 
   .reset-btn {
-    width: 44px;
-    height: 44px;
+    width: 32px;
+    height: 32px;
     border: none;
     background: none;
     display: flex;
@@ -280,8 +281,8 @@
   }
 
   .reset-btn svg {
-    width: 44px;
-    height: 44px;
+    width: 32px;
+    height: 32px;
     display: block;
   }
 
@@ -384,7 +385,7 @@
   .research-copy {
     font-family: 'Apple SD Gothic Neo', 'Pretendard', sans-serif;
     font-weight: 500;
-    font-size: 19px;
+    font-size: 26px;
     line-height: 1.65;
     color: var(--ink);
   }
@@ -431,7 +432,7 @@
   .section-body {
     font-family: 'Apple SD Gothic Neo', 'Pretendard', sans-serif;
     font-weight: 500;
-    font-size: 19px;
+    font-size: 26px;
     line-height: 1.65;
     color: var(--ink);
     max-width: 900px;
@@ -442,9 +443,7 @@
   .ticker-wrap {
     width: 100%;
     overflow: hidden;
-    border-top: 1px solid var(--ink);
-    border-bottom: 1px solid var(--ink);
-    padding: 22px 0;
+    padding: 60px 0;
     margin-top: 24px;
   }
 
@@ -452,7 +451,7 @@
     display: flex;
     width: max-content;
     gap: 0;
-    animation: ticker-scroll 28s linear infinite;
+    animation: ticker-scroll 22s linear infinite;
   }
 
   .ticker-track span {
@@ -463,8 +462,8 @@
   }
 
   @keyframes ticker-scroll {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
+    from { transform: rotate(-6.69deg) translateX(-50%); }
+    to { transform: rotate(-6.69deg) translateX(0%); }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -497,26 +496,25 @@
   }
 
   .to-top {
-    position: fixed;
-    right: 24px;
-    bottom: 24px;
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    background: var(--ink);
-    color: var(--bg);
-    border: none;
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100%;
+    padding: 24px 0 8px;
+    border: none;
+    background: none;
     cursor: pointer;
-    z-index: 55;
-    font-size: 18px;
-    transition: background 0.15s ease;
   }
 
-  .to-top:hover {
-    background: var(--accent);
+  .to-top svg {
+    width: 64px;
+    height: 64px;
+    display: block;
+    transition: opacity 0.15s ease;
+  }
+
+  .to-top:hover svg {
+    opacity: 0.6;
   }
 
   @media (max-width: 900px) {
@@ -660,13 +658,18 @@
     </div>
   </div>
 
+  <button class="to-top" id="toTopBtn" aria-label="맨 위로 이동" title="맨 위로">
+    <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="100" height="100" fill="white"/>
+      <path d="M49.9998 15L74.6998 39.7L69.0998 45.4L61.3998 37.7C57.5998 33.9 53.9998 35.4 53.9998 40.7V85H45.9998V40.7C45.9998 35.4 42.3998 33.9 38.5998 37.7L30.8998 45.4L25.2998 39.7L49.9998 15Z" fill="black"/>
+    </svg>
+  </button>
+
   <footer class="site-footer">
     <p>저작권 어쩌구 저작권 어쩌구 저작권 어쩌구 저작권 어쩌구 저작권 어쩌구<br />저작권 어쩌구 저작권 어쩌구 저작권 어쩌구 저작권 어쩌구 저작권 어쩌구<br />저작권 어쩌구</p>
     <p class="credits">DESIGN/CONTACT. &copy;sootechbox<br />WEB PRODUCTION. &copy;dagdak</p>
   </footer>
 </main>
-
-<button class="to-top" id="toTopBtn" aria-label="맨 위로 이동" title="맨 위로">↑</button>
 
 <script>
   const DEFAULT_SIZE = 48;
