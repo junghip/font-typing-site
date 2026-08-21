@@ -170,7 +170,7 @@
     text-align: left;
     font-family: 'Apple SD Gothic Neo', 'Pretendard', sans-serif;
     font-weight: 500;
-    font-size: 26px;
+    font-size: 22px;
     line-height: 1.55;
     color: var(--ink);
   }
@@ -184,7 +184,7 @@
 
   .specimen {
     background: var(--specimen-bg);
-    padding: 60px var(--side-margin);
+    padding: 60px calc(var(--side-margin) - 10px);
     border-radius: 20px;
   }
 
@@ -309,6 +309,9 @@
     white-space: pre-wrap;
     word-break: keep-all;
     color: var(--ink);
+    height: 100%;
+    column-width: 22em;
+    column-gap: 48px;
   }
 
   .editable-text:empty::before {
@@ -388,7 +391,7 @@
   .research-copy {
     font-family: 'Apple SD Gothic Neo', 'Pretendard', sans-serif;
     font-weight: 500;
-    font-size: 26px;
+    font-size: 22px;
     line-height: 1.65;
     color: var(--ink);
   }
@@ -436,7 +439,7 @@
   .section-body {
     font-family: 'Apple SD Gothic Neo', 'Pretendard', sans-serif;
     font-weight: 500;
-    font-size: 26px;
+    font-size: 22px;
     line-height: 1.65;
     color: var(--ink);
     max-width: 900px;
@@ -446,9 +449,20 @@
 
   .ticker-wrap {
     width: 100%;
-    overflow: hidden;
-    padding: 60px 0;
+    height: 170px;
+    overflow-x: hidden;
+    overflow-y: visible;
+    position: relative;
     margin-top: 24px;
+  }
+
+  .ticker-rotate {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 140vw;
+    transform: translate(-50%, -50%) rotate(6.69deg);
+    transform-origin: center center;
   }
 
   .ticker-track {
@@ -466,8 +480,8 @@
   }
 
   @keyframes ticker-scroll {
-    from { transform: rotate(-6.69deg) translateX(-50%); }
-    to { transform: rotate(-6.69deg) translateX(0%); }
+    from { transform: translateX(-50%); }
+    to { transform: translateX(0%); }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -596,8 +610,8 @@
         <div class="specimen-label">Pretendard Regular</div>
         <div class="size-control">
           <span class="size-control-label">Size / Layout</span>
-          <span class="size-value" id="sizeValue">48</span>
-          <input type="range" id="sizeSlider" min="14" max="160" step="1" value="48" aria-label="글자 크기 조절" />
+          <span class="size-value" id="sizeValue">40</span>
+          <input type="range" id="sizeSlider" min="14" max="160" step="1" value="40" aria-label="글자 크기 조절" />
           <button class="reset-btn" id="resetBtn" title="기본 사이즈와 텍스트로 초기화" aria-label="기본 사이즈와 텍스트로 초기화">
             <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect width="44" height="44" fill="black"/>
@@ -614,7 +628,7 @@
           contenteditable="true"
           spellcheck="false"
           data-placeholder="문구를 입력해주세요"
-          style="font-size: 48px;"
+          style="font-size: 40px;"
         >모든 국민은 법률이 정하는 바에 의하여 공무담임권을 가진다. 이 헌법시행 당시의 대법원장과 대법원판사가 아닌 법관은 제1항 단서의 규정에 불구하고 이 헌법에 의하여 임명된 것으로 본다. 누구든지 체포 또는 구속을 당한 때에는 즉시 변호인의 조력을 받을 권리를 가진다. 다만, 형사피고인이 스스로 변호인을 구할 수 없을 때에는 법률이 정하는 바에 의하여 국가가 변호인을 붙인다. 군인·군무원·경찰공무원 기타 법률이 정하는 자가 전투·훈련등 직무집행과 관련하여 받은 손해에 대하여는 법률이 정하는 보상외에 국가 또는 공공단체에 공무원의 직무상 불법행위로 인한 배상은 청구할 수 없다.
 
 대한민국의 영토는 한반도와 그 부속도서로 한다. 제1항의 지시를 받은 당해 행정기관은 이에 응하여야 한다. 국가는 대외무역을 육성하며, 이를 규제·조정할 수 있다. 국가는 전통문화의 계승·발전과 민족문화의 창달에 노력하여야 한다. 예비비는 총액으로 국회의 의결을 얻어야 한다. 예비비의 지출은 차기국회의 승인을 얻어야 한다. 국회는 국민의 보통·평등·직접·비밀선거에 의하여 선출된 국회의원으로 구성한다. 통신·방송의 시설기준과 신문의 기능을 보장하기 위하여 필요한 사항은 법률로 정한다. 대통령은 국무회의의 의장이 되고, 국무총리는 부의장이 된다. 계엄을 선포한 때에는 대통령은 지체없이 국회에 통고하여야 한다.</div>
@@ -652,9 +666,11 @@
   <div class="section-divider"><span class="section-divider-dot"></span></div>
 
   <div class="ticker-wrap">
-    <div class="ticker-track">
-      <span>• Play-Rulez • Play graphics experiment • chess • omok • board game • Play-Rulez •</span>
-      <span>• Play-Rulez • Play graphics experiment • chess • omok • board game • Play-Rulez •</span>
+    <div class="ticker-rotate">
+      <div class="ticker-track">
+        <span>• Play-Rulez • Play graphics experiment • chess • omok • board game • Play-Rulez •</span>
+        <span>• Play-Rulez • Play graphics experiment • chess • omok • board game • Play-Rulez •</span>
+      </div>
     </div>
   </div>
 
@@ -672,7 +688,7 @@
 </main>
 
 <script>
-  const DEFAULT_SIZE = 48;
+  const DEFAULT_SIZE = 40;
   const DEFAULT_TEXT = `모든 국민은 법률이 정하는 바에 의하여 공무담임권을 가진다. 이 헌법시행 당시의 대법원장과 대법원판사가 아닌 법관은 제1항 단서의 규정에 불구하고 이 헌법에 의하여 임명된 것으로 본다. 누구든지 체포 또는 구속을 당한 때에는 즉시 변호인의 조력을 받을 권리를 가진다. 다만, 형사피고인이 스스로 변호인을 구할 수 없을 때에는 법률이 정하는 바에 의하여 국가가 변호인을 붙인다. 군인·군무원·경찰공무원 기타 법률이 정하는 자가 전투·훈련등 직무집행과 관련하여 받은 손해에 대하여는 법률이 정하는 보상외에 국가 또는 공공단체에 공무원의 직무상 불법행위로 인한 배상은 청구할 수 없다.
 
 대한민국의 영토는 한반도와 그 부속도서로 한다. 제1항의 지시를 받은 당해 행정기관은 이에 응하여야 한다. 국가는 대외무역을 육성하며, 이를 규제·조정할 수 있다. 국가는 전통문화의 계승·발전과 민족문화의 창달에 노력하여야 한다. 예비비는 총액으로 국회의 의결을 얻어야 한다. 예비비의 지출은 차기국회의 승인을 얻어야 한다. 국회는 국민의 보통·평등·직접·비밀선거에 의하여 선출된 국회의원으로 구성한다. 통신·방송의 시설기준과 신문의 기능을 보장하기 위하여 필요한 사항은 법률로 정한다. 대통령은 국무회의의 의장이 되고, 국무총리는 부의장이 된다. 계엄을 선포한 때에는 대통령은 지체없이 국회에 통고하여야 한다.`;
