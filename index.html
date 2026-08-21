@@ -27,6 +27,8 @@
     --accent: #a83a28;
     --focus: #a83a28;
     --header-height: 96px;
+    --content-max: 1520px;
+    --placeholder: #bebdbd;
   }
 
   * { box-sizing: border-box; }
@@ -63,7 +65,7 @@
 
   .site-header-inner {
     width: 100%;
-    max-width: 1160px;
+    max-width: var(--content-max);
     margin: 0 auto;
     padding: 0 40px;
     display: flex;
@@ -141,7 +143,7 @@
 
   .page {
     width: 100%;
-    max-width: 1160px;
+    max-width: var(--content-max);
     display: flex;
     flex-direction: column;
     gap: 18px;
@@ -326,6 +328,204 @@
     padding: 0 2px;
   }
 
+  /* ---- placeholder gray blocks ---- */
+
+  .gray-block {
+    background: var(--placeholder);
+    width: 100%;
+    display: block;
+    border-radius: 2px;
+  }
+
+  .placeholder-note {
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    text-align: center;
+  }
+
+  /* ---- section divider ---- */
+
+  .section-divider {
+    width: 100%;
+    max-width: var(--content-max);
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 12px 0;
+  }
+
+  .section-divider::before,
+  .section-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--ink);
+    opacity: 0.15;
+  }
+
+  .section-divider-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--ink);
+    opacity: 0.5;
+    flex-shrink: 0;
+  }
+
+  /* ---- research section ---- */
+
+  .research-section {
+    padding: 24px 20px 64px;
+  }
+
+  .research-citation {
+    font-family: 'Apple SD Gothic Neo', 'Pretendard', sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--muted);
+  }
+
+  .research-copy {
+    font-family: 'Apple SD Gothic Neo', 'Pretendard', sans-serif;
+    font-weight: 500;
+    font-size: 19px;
+    line-height: 1.65;
+    color: var(--ink);
+  }
+
+  .research-visual {
+    aspect-ratio: 1760 / 644;
+  }
+
+  /* ---- gallery grids ---- */
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 8px;
+  }
+
+  .gallery-grid .gray-block {
+    aspect-ratio: 4 / 3;
+  }
+
+  .gallery-grid.two-col {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .gallery-grid.two-col .gray-block {
+    aspect-ratio: 16 / 10;
+  }
+
+  .gallery-single .gray-block {
+    aspect-ratio: 1760 / 867;
+  }
+
+  .gallery-wide .gray-block {
+    aspect-ratio: 1628 / 673;
+  }
+
+  /* ---- section copy blocks (font / sound) ---- */
+
+  .copy-section {
+    padding: 40px 20px;
+  }
+
+  .section-body {
+    font-family: 'Apple SD Gothic Neo', 'Pretendard', sans-serif;
+    font-weight: 500;
+    font-size: 19px;
+    line-height: 1.65;
+    color: var(--ink);
+    max-width: 900px;
+  }
+
+  /* ---- ticker ---- */
+
+  .ticker-wrap {
+    width: 100%;
+    overflow: hidden;
+    border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    padding: 22px 0;
+    margin-top: 24px;
+  }
+
+  .ticker-track {
+    display: flex;
+    width: max-content;
+    gap: 0;
+    animation: ticker-scroll 28s linear infinite;
+  }
+
+  .ticker-track span {
+    font-family: 'Penelope', 'Pretendard', sans-serif;
+    font-size: 34px;
+    white-space: nowrap;
+    padding-right: 24px;
+  }
+
+  @keyframes ticker-scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ticker-track { animation: none; }
+  }
+
+  /* ---- footer ---- */
+
+  .site-footer {
+    width: 100%;
+    max-width: var(--content-max);
+    padding: 36px 20px 64px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .site-footer p {
+    margin: 0;
+    font-family: 'Apple SD Gothic Neo', 'Pretendard', sans-serif;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--muted);
+  }
+
+  .site-footer .credits {
+    text-align: right;
+  }
+
+  .to-top {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--ink);
+    color: var(--bg);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 55;
+    font-size: 18px;
+    transition: background 0.15s ease;
+  }
+
+  .to-top:hover {
+    background: var(--accent);
+  }
+
   @media (max-width: 640px) {
     .site-header-inner { padding: 0 20px; }
     .site-title { font-size: 24px; }
@@ -334,6 +534,12 @@
     .hero-description { font-size: 22px; }
     .text-viewport { padding: 22px; height: 50vh; }
     .specimen-header, .specimen-footer { padding: 14px 16px; }
+    .research-copy, .section-body { font-size: 16px; }
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+    .gallery-grid.two-col { grid-template-columns: 1fr; }
+    .ticker-track span { font-size: 22px; }
+    .site-footer { flex-direction: column; }
+    .site-footer .credits { text-align: left; }
   }
 </style>
 </head>
@@ -360,6 +566,34 @@
     <img class="hero-graphic" src="assets/images/상단이미지.png" alt="Play-Rulez 그래픽 오브젝트" />
     <p class="hero-description">Play-Rulez는 놀이 데이터를 활용한 그래픽 실험 프로젝트이다. Play-Rulez는 놀이의 규칙을 실행하겠다는 의미이기도 하며 동시에 모든 것을 놀이로 접근하겠다는 선언이기도 하다. 놀이의 움직임과 규칙을 데이터로 기록하고 이를 시각화하는 과정에서 만들어진 그래픽을 활용해 상상력을 자극하는 시각적 경험을 제시한다.</p>
   </section>
+
+  <section class="research-section page">
+    <div class="gray-block research-visual" role="img" aria-label="리서치 이미지 placeholder"></div>
+    <p class="research-citation">이준현, 요한 하위징아의 『호모 루덴스』를 통해 본 놀이와 예술의 관계<br />요한 하위징아 『호모 루덴스』&nbsp;&nbsp;버트런드 러셀, 『게으름에 대한 찬양』</p>
+    <p class="research-copy">리서치 설명 리서치 설명 리서치 설명 리서치 설명 리서치 설명 리서치 설명 리서치 설명 리서치 설명 리서치 설명 리서치 설명 리서치 설명 리서치 설명 리서치 설명 리서치 설명 리서치 설명 리서치 설명 리서치 설명 리서치 설명 리서치 설명 리서치 설명 리서치 설명 리서치 설명 리서치 설명 리서치 설명 리서치 설명 리서치 설명</p>
+
+    <div class="gallery-grid">
+      <div class="gray-block"></div>
+      <div class="gray-block"></div>
+      <div class="gray-block"></div>
+    </div>
+    <div class="gallery-grid">
+      <div class="gray-block"></div>
+      <div class="gray-block"></div>
+    </div>
+    <p class="placeholder-note">이미지 자리 &mdash; 실험 그래픽 콜라주 (placeholder)</p>
+  </section>
+
+  <section class="research-section page" style="padding-top: 0;">
+    <p class="placeholder-note" style="text-align:left; margin-bottom: -4px;">타이포그래피 레퍼런스 (placeholder)</p>
+    <div class="gallery-grid">
+      <div class="gray-block"></div>
+      <div class="gray-block"></div>
+      <div class="gray-block"></div>
+    </div>
+  </section>
+
+  <div class="section-divider"><span class="section-divider-dot"></span></div>
 
   <section class="specimen-section page">
     <div class="eyebrow">Type specimen &mdash; 대한민국헌법</div>
@@ -402,7 +636,48 @@
 
     <div class="hint">텍스트를 클릭해 직접 수정할 수 있습니다. 슬라이더로 크기를 조절하면 글자가 커질수록 일부만, 작아질수록 더 많은 문장이 보입니다. 초기화 버튼을 누르면 크기와 문구가 모두 기본값으로 돌아갑니다.</div>
   </section>
+
+  <section class="copy-section page">
+    <p class="section-body">폰트 설명 폰트 설명 폰트 설명 폰트 설명 폰트 설명 폰트 설명<br />폰트 설명 폰트 설명 폰트 설명 폰트 설명 폰트 설명 폰트 설명<br />폰트 설명 폰트 설명 폰트 설명 폰트 설명 폰트 설명 폰트 설명<br />폰트 설명 폰트 설명 폰트 설명 폰트 설명 폰트 설명 폰트 설명</p>
+  </section>
+
+  <section class="research-section page" style="padding-top:0;">
+    <div class="gallery-grid two-col">
+      <div class="gray-block" style="aspect-ratio: 1628/673;"></div>
+      <div class="gray-block" style="aspect-ratio: 510/673;"></div>
+    </div>
+    <div class="gallery-grid two-col" style="margin-top:16px;">
+      <div class="gray-block"></div>
+      <div class="gray-block"></div>
+    </div>
+    <p class="placeholder-note">이미지 자리 &mdash; 보드게임 아카이브 (placeholder)</p>
+  </section>
+
+  <section class="research-section page gallery-single" style="padding-top:0;">
+    <div class="gray-block"></div>
+    <p class="placeholder-note">이미지 자리 &mdash; 사운드/데이터 시각화 스크린샷 (placeholder)</p>
+  </section>
+
+  <section class="copy-section page">
+    <p class="section-body">사운드&amp;영상 설명 사운드&amp;영상 설명 사운드&amp;영상 설명 사운드&amp;영상 설명 사운드&amp;영상 설명 사운드&amp;영상 설명 사운드&amp;영상 설명 사운드&amp;영상 설명 사운드&amp;영상 설명 사운드&amp;영상 설명</p>
+  </section>
+
+  <div class="section-divider"><span class="section-divider-dot"></span></div>
+
+  <div class="ticker-wrap">
+    <div class="ticker-track">
+      <span>• Play-Rulez • Play graphics experiment • chess • omok • board game • Play-Rulez •</span>
+      <span>• Play-Rulez • Play graphics experiment • chess • omok • board game • Play-Rulez •</span>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <p>저작권 어쩌구 저작권 어쩌구 저작권 어쩌구 저작권 어쩌구 저작권 어쩌구<br />저작권 어쩌구 저작권 어쩌구 저작권 어쩌구 저작권 어쩌구 저작권 어쩌구<br />저작권 어쩌구</p>
+    <p class="credits">DESIGN/CONTACT. &copy;sootechbox<br />WEB PRODUCTION. &copy;dagdak</p>
+  </footer>
 </main>
+
+<button class="to-top" id="toTopBtn" aria-label="맨 위로 이동" title="맨 위로">↑</button>
 
 <script>
   const DEFAULT_SIZE = 48;
@@ -469,6 +744,10 @@
   window.addEventListener('resize', () => requestAnimationFrame(countVisibleChars));
 
   applySize(DEFAULT_SIZE);
+
+  document.getElementById('toTopBtn').addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
 </script>
 
 </body>
